@@ -11,6 +11,8 @@ import {
 } from "@apollo/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import CharacterDetail from "./components/CharacterDetail/CharacterDetail";
+import { Provider } from "react-redux";
+import { store } from "./app/store";
 
 const httpLink = createHttpLink({
   uri: "https://rickandmortyapi.com/graphql",
@@ -40,9 +42,11 @@ const router = createBrowserRouter([
 
 root.render(
   <React.StrictMode>
-    <ApolloProvider client={client}>
-      <RouterProvider router={router} />
-    </ApolloProvider>
+    <Provider store={store}>
+      <ApolloProvider client={client}>
+        <RouterProvider router={router} />
+      </ApolloProvider>
+    </Provider>
   </React.StrictMode>
 );
 
