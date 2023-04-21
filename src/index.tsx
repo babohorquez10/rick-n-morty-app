@@ -9,6 +9,8 @@ import {
   createHttpLink,
   InMemoryCache,
 } from "@apollo/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import CharacterDetail from "./components/CharacterDetail/CharacterDetail";
 
 const httpLink = createHttpLink({
   uri: "https://rickandmortyapi.com/graphql",
@@ -22,10 +24,24 @@ const client = new ApolloClient({
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      {
+        path: "characters/:characterId",
+        element: <CharacterDetail />,
+      },
+    ],
+  },
+]);
+
 root.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <App />
+      <RouterProvider router={router} />
     </ApolloProvider>
   </React.StrictMode>
 );

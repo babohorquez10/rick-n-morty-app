@@ -1,4 +1,5 @@
 import Sidebar from "../components/Sidebar/Sidebar";
+import { Outlet } from "react-router-dom";
 
 function MainPage() {
   return (
@@ -6,7 +7,9 @@ function MainPage() {
       <div className="bg-gray-200">
         <Sidebar />
       </div>
-      <div>Main</div>
+      <div>
+        <Outlet />
+      </div>
     </div>
   );
 }
