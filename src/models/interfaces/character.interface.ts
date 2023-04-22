@@ -4,4 +4,5 @@ export interface Character {
   image: string;
   species: string;
   status: "Alive" | "Dead" | "unknown";
+  starred: boolean;
 }

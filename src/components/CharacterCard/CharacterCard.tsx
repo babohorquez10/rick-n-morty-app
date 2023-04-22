@@ -1,11 +1,19 @@
 import { Character } from "../../models/interfaces/character.interface";
 import heart from "../../imgs/Heart.png";
+import heartSelected from "../../imgs/HeartSelected.png";
+import { useAppDispatch } from "../../app/hooks";
+import { starCharacter } from "../../reducers/characters/characters.actions";
 
 type CharacterCardProps = {
   character: Character;
 };
 
 const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
+  const dispatch = useAppDispatch();
+  const handleStarCharacted = (id: any) => {
+    dispatch(starCharacter(id));
+  };
+
   return (
     <div className="py-4 cursor-pointer border-t border-t-primary-100">
       <div className="px-5 flex items-center">
@@ -22,7 +30,12 @@ const CharacterCard: React.FC<CharacterCardProps> = ({ character }) => {
             {character.species}
           </div>
         </div>
-        <img className="cursor-pointer" src={heart} alt="Star" />
+        <img
+          className="cursor-pointer"
+          src={character.starred ? heartSelected : heart}
+          onClick={() => handleStarCharacted(character.id)}
+          alt="Star"
+        />
       </div>
     </div>
   );

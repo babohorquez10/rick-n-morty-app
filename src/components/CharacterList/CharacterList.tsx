@@ -5,8 +5,10 @@ import CharacterCard from "../CharacterCard/CharacterCard";
 import { selectCharacters } from "../../reducers/characters/characters.selectors";
 import { setCharacters } from "../../reducers/characters/characters.actions";
 import { useAppDispatch } from "../../app/hooks";
+import ListTitle from "../ListTitle/ListTitle";
 
 function CharacterList() {
+  const dispatch = useAppDispatch();
   const CHARACTERS_QUERY = gql`
     {
       characters {
@@ -24,9 +26,6 @@ function CharacterList() {
     }
   `;
 
-  const dispatch = useAppDispatch();
-  const characters = useSelector(selectCharacters);
-
   const { data, loading, error } = useQuery(CHARACTERS_QUERY);
 
   useEffect(() => {
@@ -36,17 +35,36 @@ function CharacterList() {
     }
   }, [data]);
 
+  const charactersArray = useSelector(selectCharacters);
+  const starredCharacters = charactersArray.filter(
+    (character) => !!character.starred
+  );
+  const characters = charactersArray.filter((character) => !character.starred);
+
+  if (loading) {
+    return <>Loading...</>;
+  }
+
+  if (error) {
+    return <>Something went wrong.</>;
+  }
+
   return (
     <>
-      {loading ? (
-        "Loading..."
-      ) : (
-        <div className="h-full">
-          {characters.map((item) => (
-            <CharacterCard key={item.id} character={item} />
-          ))}
-        </div>
-      )}
+      <div className="h-full">
+        <ListTitle
+          title="Starred Characters"
+          count={starredCharacters?.length}
+        />
+        {starredCharacters.map((item) => (
+          <CharacterCard key={item.id} character={item} />
+        ))}
+
+        <ListTitle title="Characters" count={characters?.length} />
+        {characters.map((item) => (
+          <CharacterCard key={item.id} character={item} />
+        ))}
+      </div>
     </>
   );
 }
