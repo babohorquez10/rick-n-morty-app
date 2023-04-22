@@ -11,8 +11,12 @@ module.exports = {
       secondary: {
         600: "#63D838",
       },
+      transparent: "transparent",
       grey: "#6B7280",
       white: "#FFF",
+      "grey-secondary": "#F3F4F6",
+      "grey-border": "#E5E7EB",
+      "filter-button-text": "#111827",
     },
     extend: {
       gridTemplateColumns: {
@@ -21,6 +25,8 @@ module.exports = {
       },
       boxShadow: {
         detailShadow: "0px 4px 60px rgba(0, 0, 0, 0.05)",
+        filters:
+          "0px 0px 0px 1px rgba(0, 0, 0, 0.05), 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -2px rgba(0, 0, 0, 0.05)",
       },
     },
   },

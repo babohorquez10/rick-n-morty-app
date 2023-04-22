@@ -7,6 +7,7 @@ import { setCharacters } from "../../reducers/characters/characters.actions";
 import { useAppDispatch } from "../../app/hooks";
 import ListTitle from "../ListTitle/ListTitle";
 import { useParams } from "react-router-dom";
+import SearchBar from "../SearchBar/SearchBar";
 
 function CharacterList() {
   const dispatch = useAppDispatch();
@@ -53,6 +54,8 @@ function CharacterList() {
   return (
     <>
       <div className="h-full">
+        <SearchBar />
+
         <ListTitle
           title="Starred Characters"
           count={starredCharacters?.length}
