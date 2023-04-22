@@ -4,7 +4,16 @@ import filtersActive from "../../imgs/FiltersActive.png";
 import search from "../../imgs/search.svg";
 import FilterButton from "../FilterButton/FilterButton";
 
-const SearchBar = () => {
+type SearchBarProps = {
+  handleFilterResults: (filterObject: {}) => void;
+};
+
+export type FilterObjectType = {
+  starred?: boolean;
+  species?: string;
+};
+
+const SearchBar: React.FC<SearchBarProps> = ({ handleFilterResults }) => {
   const [showFilters, setShowFilters] = useState(false);
   const [characterFilter, setCharacterFilter] = useState("All");
   const characterFilterOptions = ["All", "Starred", "Others"];
@@ -13,11 +22,22 @@ const SearchBar = () => {
   const speciesFilterOptions = ["All", "Human", "Alien"];
 
   const handleFilter = () => {
-    //
+    const filterObject: FilterObjectType = {};
+
+    if (characterFilter !== "All") {
+      filterObject.starred = characterFilter === "Starred";
+    }
+
+    if (speciesFilter !== "All") {
+      filterObject.species = speciesFilter;
+    }
+
+    handleFilterResults(filterObject);
+    setShowFilters(false);
   };
 
   return (
-    <div className="bg-grey-secondary rounded-lg px-5 py-4 flex items-center relative">
+    <div className="bg-grey-secondary rounded-lg px-5 py-4 mb-4 flex items-center relative">
       <div
         className={`absolute bg-white shadow-filters rounded-md p-6 w-full left-0 top-16 z-10 ${
           !showFilters && "hidden"
