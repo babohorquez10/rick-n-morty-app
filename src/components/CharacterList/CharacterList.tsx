@@ -1,5 +1,10 @@
 import { gql, useQuery } from "@apollo/client";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import CharacterCard from "../CharacterCard/CharacterCard";
+import { selectCharacters } from "../../reducers/characters/characters.selectors";
+import { setCharacters } from "../../reducers/characters/characters.actions";
+import { useAppDispatch } from "../../app/hooks";
 
 function CharacterList() {
   const CHARACTERS_QUERY = gql`
@@ -19,21 +24,30 @@ function CharacterList() {
     }
   `;
 
+  const dispatch = useAppDispatch();
+  const characters = useSelector(selectCharacters);
+
   const { data, loading, error } = useQuery(CHARACTERS_QUERY);
 
+  useEffect(() => {
+    if (data?.characters?.results) {
+      console.log(data.characters.results);
+      dispatch(setCharacters(data.characters.results.slice(0, 5)));
+    }
+  }, [data]);
+
   return (
-    <div>
+    <>
       {loading ? (
         "Loading..."
       ) : (
-        <ul>
-          {data.characters.results.map((item: any) => (
-            <li key={item.id}>{item.name}</li>
+        <div className="h-full">
+          {characters.map((item) => (
+            <CharacterCard key={item.id} character={item} />
           ))}
-          <li>{}</li>
-        </ul>
+        </div>
       )}
-    </div>
+    </>
   );
 }
 

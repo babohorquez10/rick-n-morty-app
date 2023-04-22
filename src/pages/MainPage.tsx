@@ -3,11 +3,11 @@ import { Outlet } from "react-router-dom";
 
 function MainPage() {
   return (
-    <div className="h-screen grid grid-cols-sidebar">
-      <div className="bg-gray-200">
+    <div className="h-screen grid grid-cols-sidebar overflow-hidden">
+      <div className="h-screen">
         <Sidebar />
       </div>
-      <div>
+      <div className="h-screen px-4 py-10 shadow-detailShadow">
         <Outlet />
       </div>
     </div>
