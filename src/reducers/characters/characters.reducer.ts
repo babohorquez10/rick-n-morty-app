@@ -4,7 +4,6 @@ import { Character } from "../../models/interfaces/character.interface";
 
 interface CharactersState {
   characters: Character[];
-  selectedCharacter?: Character;
 }
 
 const initialState: CharactersState = {

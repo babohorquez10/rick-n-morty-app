@@ -33,7 +33,7 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: "characters/:characterId",
+        path: "characters/:selectedCharacterId",
         element: <CharacterDetail />,
       },
     ],

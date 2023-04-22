@@ -12,6 +12,7 @@ module.exports = {
         600: "#63D838",
       },
       grey: "#6B7280",
+      white: "#FFF",
     },
     extend: {
       gridTemplateColumns: {

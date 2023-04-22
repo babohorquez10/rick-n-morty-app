@@ -7,7 +7,7 @@ function MainPage() {
       <div className="h-screen">
         <Sidebar />
       </div>
-      <div className="h-screen px-4 py-10 shadow-detailShadow">
+      <div className="h-screen px-24 py-10 shadow-detailShadow">
         <Outlet />
       </div>
     </div>
