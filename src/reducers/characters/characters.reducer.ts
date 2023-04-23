@@ -1,6 +1,7 @@
 import { createReducer } from "@reduxjs/toolkit";
 import {
   addComment,
+  deleteCharacter,
   setCharacters,
   setCharactersError,
   setFilters,
@@ -92,5 +93,12 @@ export const charactersReducer = createReducer(initialState, (builder: any) => {
   builder.addCase(setSearchKeyword, (state: CharactersState, action: any) => ({
     ...state,
     searchKeyword: action.payload,
+  }));
+
+  builder.addCase(deleteCharacter, (state: CharactersState, action: any) => ({
+    ...state,
+    characters: state.characters.filter(
+      (character) => character.id !== action.payload
+    ),
   }));
 });

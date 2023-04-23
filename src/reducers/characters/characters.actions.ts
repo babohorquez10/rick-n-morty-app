@@ -25,3 +25,6 @@ export const setSortOrder = createAction<string>("characters/setSortOrder");
 export const setSearchKeyword = createAction<string>(
   "characters/setSearchKeyword"
 );
+export const deleteCharacter = createAction<string>(
+  "characters/deleteCharacter"
+);
