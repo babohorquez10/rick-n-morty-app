@@ -1,12 +1,14 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { gql, useQuery } from "@apollo/client";
 import { useSelector } from "react-redux";
 import { selectCharacters } from "../../reducers/characters/characters.selectors";
+import { starCharacter } from "../../reducers/characters/characters.actions";
+import { useAppDispatch } from "../../app/hooks";
+import { MobileView } from "react-device-detect";
 import CharacterDetailItem from "../CharacterDetailItem/CharacterDetailItem";
 import heart from "../../imgs/Heart.png";
 import heartSelected from "../../imgs/HeartSelected.png";
-import { starCharacter } from "../../reducers/characters/characters.actions";
-import { useAppDispatch } from "../../app/hooks";
+import arrowIcon from "../../imgs/Arrow.png";
 
 function CharacterDetail() {
   const { selectedCharacterId } = useParams();
@@ -28,11 +30,15 @@ function CharacterDetail() {
   const { data, loading, error } = useQuery(CHARACTER_QUERY);
 
   if (loading) {
-    return <>Loading...</>;
+    return <div className="px-6 py-4 md:px-24 md:py-10">Loading...</div>;
   }
 
   if (error) {
-    return <>Something wrong happened.</>;
+    return (
+      <div className="px-6 py-4 md:px-24 md:py-10">
+        Something wrong happened.
+      </div>
+    );
   }
 
   const { character } = data;
@@ -45,10 +51,16 @@ function CharacterDetail() {
   };
 
   return (
-    <>
+    <div className="px-6 py-4 md:px-24 md:py-10">
       {character && (
         <>
           <div className="relative w-fit">
+            <MobileView>
+              <Link to="/">
+                <img className="w-6 mb-6" src={arrowIcon} alt="Back" />
+              </Link>
+            </MobileView>
+
             <img
               className="rounded-full h-20 mb-2"
               src={character.image}
@@ -69,7 +81,7 @@ function CharacterDetail() {
           <CharacterDetailItem title="Gender" value={character.gender} />
         </>
       )}
-    </>
+    </div>
   );
 }
 

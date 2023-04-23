@@ -1,51 +1,20 @@
-import { gql, useQuery } from "@apollo/client";
-import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import CharacterCard from "../CharacterCard/CharacterCard";
-import { selectCharacters } from "../../reducers/characters/characters.selectors";
-import { setCharacters } from "../../reducers/characters/characters.actions";
-import { useAppDispatch } from "../../app/hooks";
+import {
+  selectCharacters,
+  selectCharactersError,
+  selectFilters,
+  selectLoadingCharacters,
+} from "../../reducers/characters/characters.selectors";
 import ListTitle from "../ListTitle/ListTitle";
 import { useParams } from "react-router-dom";
-import SearchBar, { FilterObjectType } from "../SearchBar/SearchBar";
-import { Character } from "../../models/interfaces/character.interface";
+import SearchBar from "../SearchBar/SearchBar";
 
 function CharacterList() {
-  const dispatch = useAppDispatch();
-  const CHARACTERS_QUERY = gql`
-    {
-      characters {
-        info {
-          count
-        }
-        results {
-          id
-          name
-          status
-          species
-          image
-        }
-      }
-    }
-  `;
-
-  const { data, loading, error } = useQuery(CHARACTERS_QUERY);
   const { selectedCharacterId } = useParams();
-  const [filterObject, setFilterObject] = useState<FilterObjectType>({});
-
-  useEffect(() => {
-    if (data?.characters?.results) {
-      dispatch(
-        setCharacters(
-          data.characters.results.map((item: Character) => ({
-            ...item,
-            starred: false,
-          }))
-          // .slice(0, 5)
-        )
-      );
-    }
-  }, [data]);
+  const filterObject = useSelector(selectFilters);
+  const loading = useSelector(selectLoadingCharacters);
+  const error = useSelector(selectCharactersError);
 
   const charactersArray = useSelector(selectCharacters).filter((item: any) => {
     const noFilterMatchMatch =
@@ -61,10 +30,6 @@ function CharacterList() {
   );
   const characters = charactersArray.filter((character) => !character.starred);
 
-  const handleFilter = (filterObject: FilterObjectType) => {
-    setFilterObject(filterObject);
-  };
-
   if (loading) {
     return <>Loading...</>;
   }
@@ -76,7 +41,7 @@ function CharacterList() {
   return (
     <>
       <div className="h-full">
-        <SearchBar handleFilterResults={handleFilter} />
+        <SearchBar />
 
         {Object.keys(filterObject).length > 0 && (
           <div className="flex justify-between mb-4">

@@ -9,8 +9,6 @@ import {
   createHttpLink,
   InMemoryCache,
 } from "@apollo/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import CharacterDetail from "./components/CharacterDetail/CharacterDetail";
 import { Provider } from "react-redux";
 import { store } from "./app/store";
 
@@ -27,24 +25,11 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-    children: [
-      {
-        path: "characters/:selectedCharacterId",
-        element: <CharacterDetail />,
-      },
-    ],
-  },
-]);
-
 root.render(
   <React.StrictMode>
     <Provider store={store}>
       <ApolloProvider client={client}>
-        <RouterProvider router={router} />
+        <App />
       </ApolloProvider>
     </Provider>
   </React.StrictMode>

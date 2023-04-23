@@ -1,13 +1,26 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { setCharacters, starCharacter } from "./characters.actions";
+import {
+  setCharacters,
+  setCharactersError,
+  setFilters,
+  setLoadingCharacters,
+  starCharacter,
+} from "./characters.actions";
 import { Character } from "../../models/interfaces/character.interface";
+import { FilterObjectType } from "../../components/Filters/Filters";
 
 interface CharactersState {
   characters: Character[];
+  loadingCharacters: boolean;
+  charactersError: boolean;
+  filters: FilterObjectType;
 }
 
 const initialState: CharactersState = {
   characters: [],
+  loadingCharacters: true,
+  charactersError: false,
+  filters: {},
 };
 
 export const charactersReducer = createReducer(initialState, (builder: any) => {
@@ -15,6 +28,22 @@ export const charactersReducer = createReducer(initialState, (builder: any) => {
     ...state,
     characters: action.payload,
   }));
+
+  builder.addCase(
+    setLoadingCharacters,
+    (state: CharactersState, action: any) => ({
+      ...state,
+      loadingCharacters: action.payload,
+    })
+  );
+
+  builder.addCase(
+    setCharactersError,
+    (state: CharactersState, action: any) => ({
+      ...state,
+      charactersError: action.payload,
+    })
+  );
 
   builder.addCase(starCharacter, (state: CharactersState, action: any) => ({
     ...state,
@@ -25,5 +54,10 @@ export const charactersReducer = createReducer(initialState, (builder: any) => {
           ? !character.starred
           : character.starred,
     })),
+  }));
+
+  builder.addCase(setFilters, (state: CharactersState, action: any) => ({
+    ...state,
+    filters: action.payload,
   }));
 });
