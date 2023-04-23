@@ -9,6 +9,7 @@ import CharacterDetailItem from "../CharacterDetailItem/CharacterDetailItem";
 import heart from "../../imgs/Heart.png";
 import heartSelected from "../../imgs/HeartSelected.png";
 import arrowIcon from "../../imgs/Arrow.png";
+import CharacterComments from "../CharacterComments/CharacterComments";
 
 function CharacterDetail() {
   const { selectedCharacterId } = useParams();
@@ -42,16 +43,15 @@ function CharacterDetail() {
   }
 
   const { character } = data;
-  const isStarred = characters.find(
-    (item) => item.id === character.id
-  )?.starred;
+  const characterData = characters.find((item) => item.id === character.id);
+  const isStarred = characterData?.starred;
 
   const handleStarCharacter = () => {
     dispatch(starCharacter(character?.id));
   };
 
   return (
-    <div className="px-6 py-4 md:px-24 md:py-10">
+    <div className="px-6 py-4 md:px-24 md:py-10 overflow-y-scroll h-full">
       {character && (
         <>
           <div className="relative w-fit">
@@ -79,6 +79,10 @@ function CharacterDetail() {
           <CharacterDetailItem title="Species" value={character.species} />
           <CharacterDetailItem title="Status" value={character.status} />
           <CharacterDetailItem title="Gender" value={character.gender} />
+
+          <div className="pt-4 mt-3">
+            <CharacterComments character={characterData} />
+          </div>
         </>
       )}
     </div>

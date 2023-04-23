@@ -2,6 +2,11 @@ import { createAction } from "@reduxjs/toolkit";
 import { Character } from "../../models/interfaces/character.interface";
 import { FilterObjectType } from "../../components/Filters/Filters";
 
+type AddCommentType = {
+  id: string;
+  comment: string;
+};
+
 export const setCharacters = createAction<Character[]>(
   "characters/setCharacters"
 );
@@ -15,3 +20,4 @@ export const setCharactersError = createAction<boolean>(
 export const setFilters = createAction<FilterObjectType>(
   "characters/setFilters"
 );
+export const addComment = createAction<AddCommentType>("characters/addComment");

@@ -5,4 +5,5 @@ export interface Character {
   species: string;
   status: "Alive" | "Dead" | "unknown";
   starred: boolean;
+  comments: string[];
 }

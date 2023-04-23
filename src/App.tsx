@@ -83,6 +83,7 @@ function App() {
           data.characters.results.map((item: Character) => ({
             ...item,
             starred: false,
+            comments: [],
           }))
           // .slice(0, 5)
         )

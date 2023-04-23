@@ -1,5 +1,6 @@
 import { createReducer } from "@reduxjs/toolkit";
 import {
+  addComment,
   setCharacters,
   setCharactersError,
   setFilters,
@@ -59,5 +60,17 @@ export const charactersReducer = createReducer(initialState, (builder: any) => {
   builder.addCase(setFilters, (state: CharactersState, action: any) => ({
     ...state,
     filters: action.payload,
+  }));
+
+  builder.addCase(addComment, (state: CharactersState, action: any) => ({
+    ...state,
+    characters: state.characters.map((character) =>
+      character.id === action.payload.id
+        ? {
+            ...character,
+            comments: character.comments.concat([action.payload.comment]),
+          }
+        : { ...character }
+    ),
   }));
 });
