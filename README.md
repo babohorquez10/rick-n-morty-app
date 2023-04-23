@@ -1,46 +1,40 @@
-# Getting Started with Create React App
+# Rick And Morty List App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+React web application that shows the characters of Rick and Morty.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- List of characters.
+- Detail of a character.
+- Star characters.
+- Filter characters by species or starred characters.
+- Sort characters by name.
+- Add comments.
+- Search characters by name.
+- Delete characters.
 
-### `npm start`
+## Instalation and Usage
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Download the project.
+- Run ``npm install`` on the root folder of the project to install all the dependencies.
+- Run ``npm start``.
+- The application will start running on: http://localhost:3000/
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Mobile version
 
-### `npm test`
+**Note: It is important to follow the next steps in order to check the mobile version of the app.**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Run the application (check the previous steps).
+- Open http://localhost:3000/
+- Open the console panel on Google Chrome (Ctrl + Shift + J).
+- On the top-left corner of the panel, click the option "Toogle device Toolbar (Ctrl + Shift + M)". This option will change the viewport from desktop to mobile.
+- Reload the application (Ctrl + R).
 
-### `npm run build`
+## Technologies I used
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- React.
+- GraphQL.
+- React-router-dom.
+- TailwindCSS.
+- Redux.
+- TypeScript.
