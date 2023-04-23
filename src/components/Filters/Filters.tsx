@@ -1,6 +1,9 @@
 import { useState } from "react";
 import FilterButton from "../FilterButton/FilterButton";
-import { setFilters } from "../../reducers/characters/characters.actions";
+import {
+  setFilters,
+  setSortOrder,
+} from "../../reducers/characters/characters.actions";
 import { useAppDispatch } from "../../app/hooks";
 import { MobileView, isMobile } from "react-device-detect";
 import { Link } from "react-router-dom";
@@ -19,6 +22,9 @@ const Filters = () => {
   const [speciesFilter, setSpeciesFilter] = useState("All");
   const speciesFilterOptions = ["All", "Human", "Alien"];
 
+  const [sortOrder, setCharacterSortOrder] = useState("Default");
+  const sortOrderOptions = ["Default", "A-Z", "Z-A"];
+
   const handleFilter = () => {
     const filterObject: FilterObjectType = {};
 
@@ -30,6 +36,7 @@ const Filters = () => {
       filterObject.species = speciesFilter;
     }
 
+    dispatch(setSortOrder(sortOrder));
     dispatch(setFilters(filterObject));
   };
 
@@ -66,6 +73,18 @@ const Filters = () => {
             active={speciesFilter === item}
             label={item}
             handleClick={() => setSpeciesFilter(item)}
+          />
+        ))}
+      </div>
+
+      <h5 className="text-grey text-sm font-medium mb-2">Sort Order</h5>
+      <div className="grid grid-cols-3 gap-2 mb-6">
+        {sortOrderOptions.map((item) => (
+          <FilterButton
+            key={item}
+            active={sortOrder === item}
+            label={item}
+            handleClick={() => setCharacterSortOrder(item)}
           />
         ))}
       </div>

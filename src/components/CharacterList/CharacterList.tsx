@@ -5,6 +5,7 @@ import {
   selectCharactersError,
   selectFilters,
   selectLoadingCharacters,
+  selectSortOrder,
 } from "../../reducers/characters/characters.selectors";
 import ListTitle from "../ListTitle/ListTitle";
 import { useParams } from "react-router-dom";
@@ -15,15 +16,23 @@ function CharacterList() {
   const filterObject = useSelector(selectFilters);
   const loading = useSelector(selectLoadingCharacters);
   const error = useSelector(selectCharactersError);
+  const sortOrder = useSelector(selectSortOrder);
 
-  const charactersArray = useSelector(selectCharacters).filter((item: any) => {
-    const noFilterMatchMatch =
-      Object.entries(filterObject).findIndex(
-        (entry) => item[entry[0]] !== entry[1]
-      ) === -1;
+  const charactersArray = useSelector(selectCharacters)
+    .filter((item: any) => {
+      const noFilterMatch =
+        Object.entries(filterObject).findIndex(
+          (entry) => item[entry[0]] !== entry[1]
+        ) === -1;
 
-    return noFilterMatchMatch;
-  });
+      return noFilterMatch;
+    })
+    .sort((charA, charB) => {
+      if (sortOrder === "Default") return 1;
+      if (charA.name > charB.name) return sortOrder === "A-Z" ? 1 : -1;
+      else if (charA.name < charB.name) return sortOrder === "A-Z" ? -1 : 1;
+      return 0;
+    });
 
   const starredCharacters = charactersArray.filter(
     (character) => !!character.starred

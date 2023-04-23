@@ -21,3 +21,4 @@ export const setFilters = createAction<FilterObjectType>(
   "characters/setFilters"
 );
 export const addComment = createAction<AddCommentType>("characters/addComment");
+export const setSortOrder = createAction<string>("characters/setSortOrder");

@@ -5,6 +5,7 @@ import {
   setCharactersError,
   setFilters,
   setLoadingCharacters,
+  setSortOrder,
   starCharacter,
 } from "./characters.actions";
 import { Character } from "../../models/interfaces/character.interface";
@@ -15,6 +16,7 @@ interface CharactersState {
   loadingCharacters: boolean;
   charactersError: boolean;
   filters: FilterObjectType;
+  sortOrder: string;
 }
 
 const initialState: CharactersState = {
@@ -22,6 +24,7 @@ const initialState: CharactersState = {
   loadingCharacters: true,
   charactersError: false,
   filters: {},
+  sortOrder: "Default",
 };
 
 export const charactersReducer = createReducer(initialState, (builder: any) => {
@@ -72,5 +75,10 @@ export const charactersReducer = createReducer(initialState, (builder: any) => {
           }
         : { ...character }
     ),
+  }));
+
+  builder.addCase(setSortOrder, (state: CharactersState, action: any) => ({
+    ...state,
+    sortOrder: action.payload,
   }));
 });

@@ -85,7 +85,6 @@ function App() {
             starred: false,
             comments: [],
           }))
-          // .slice(0, 5)
         )
       );
     }
