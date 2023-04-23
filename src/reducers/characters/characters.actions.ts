@@ -1,6 +1,6 @@
 import { createAction } from "@reduxjs/toolkit";
 import { Character } from "../../models/interfaces/character.interface";
-import { FilterObjectType } from "../../components/Filters/Filters";
+import { FilterObjectType } from "./characters.reducer";
 
 type AddCommentType = {
   id: string;
@@ -22,3 +22,6 @@ export const setFilters = createAction<FilterObjectType>(
 );
 export const addComment = createAction<AddCommentType>("characters/addComment");
 export const setSortOrder = createAction<string>("characters/setSortOrder");
+export const setSearchKeyword = createAction<string>(
+  "characters/setSearchKeyword"
+);

@@ -3,14 +3,22 @@ import filters from "../../imgs/Filters.png";
 import filtersActive from "../../imgs/FiltersActive.png";
 import search from "../../imgs/search.svg";
 import Filters from "../Filters/Filters";
-import { selectFilters } from "../../reducers/characters/characters.selectors";
+import {
+  selectFilters,
+  selectSearchKeyWord,
+} from "../../reducers/characters/characters.selectors";
 import { useSelector } from "react-redux";
 import { isMobile } from "react-device-detect";
 import { Link } from "react-router-dom";
+import { setSearchKeyword } from "../../reducers/characters/characters.actions";
+import { useAppDispatch } from "../../app/hooks";
 
 const SearchBar = () => {
-  const [showFilters, setShowFilters] = useState(false);
+  const dispatch = useAppDispatch();
+
   const filterObject = useSelector(selectFilters);
+  const searchKeyword = useSelector(selectSearchKeyWord);
+  const [showFilters, setShowFilters] = useState(false);
 
   useEffect(() => {
     setShowFilters(false);
@@ -30,6 +38,10 @@ const SearchBar = () => {
         type="text"
         className="bg-transparent flex-1"
         placeholder="Search or filter results"
+        value={searchKeyword}
+        onChange={(e) => {
+          dispatch(setSearchKeyword(e.target.value));
+        }}
       />
 
       {/* Filters on mobile version. */}

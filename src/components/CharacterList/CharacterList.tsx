@@ -5,6 +5,7 @@ import {
   selectCharactersError,
   selectFilters,
   selectLoadingCharacters,
+  selectSearchKeyWord,
   selectSortOrder,
 } from "../../reducers/characters/characters.selectors";
 import ListTitle from "../ListTitle/ListTitle";
@@ -13,10 +14,12 @@ import SearchBar from "../SearchBar/SearchBar";
 
 function CharacterList() {
   const { selectedCharacterId } = useParams();
+
   const filterObject = useSelector(selectFilters);
   const loading = useSelector(selectLoadingCharacters);
   const error = useSelector(selectCharactersError);
   const sortOrder = useSelector(selectSortOrder);
+  const searchKeyword = useSelector(selectSearchKeyWord);
 
   const charactersArray = useSelector(selectCharacters)
     .filter((item: any) => {
@@ -25,7 +28,11 @@ function CharacterList() {
           (entry) => item[entry[0]] !== entry[1]
         ) === -1;
 
-      return noFilterMatch;
+      const hasKeyword = searchKeyword
+        ? item.name.toLowerCase().includes(searchKeyword.trim().toLowerCase())
+        : true;
+
+      return noFilterMatch && hasKeyword;
     })
     .sort((charA, charB) => {
       if (sortOrder === "Default") return 1;

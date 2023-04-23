@@ -58,6 +58,7 @@ function App() {
           name
           status
           species
+          gender
           image
         }
       }

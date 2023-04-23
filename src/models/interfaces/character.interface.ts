@@ -3,6 +3,7 @@ export interface Character {
   name: string;
   image: string;
   species: string;
+  gender: string;
   status: "Alive" | "Dead" | "unknown";
   starred: boolean;
   comments: string[];

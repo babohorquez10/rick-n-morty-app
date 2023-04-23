@@ -8,11 +8,7 @@ import { useAppDispatch } from "../../app/hooks";
 import { MobileView, isMobile } from "react-device-detect";
 import { Link } from "react-router-dom";
 import arrowIcon from "../../imgs/Arrow.png";
-
-export type FilterObjectType = {
-  starred?: boolean;
-  species?: string;
-};
+import { FilterObjectType } from "../../reducers/characters/characters.reducer";
 
 const Filters = () => {
   const dispatch = useAppDispatch();

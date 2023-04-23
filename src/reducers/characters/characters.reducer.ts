@@ -5,18 +5,24 @@ import {
   setCharactersError,
   setFilters,
   setLoadingCharacters,
+  setSearchKeyword,
   setSortOrder,
   starCharacter,
 } from "./characters.actions";
 import { Character } from "../../models/interfaces/character.interface";
-import { FilterObjectType } from "../../components/Filters/Filters";
+
+export type FilterObjectType = {
+  starred?: boolean;
+  species?: string;
+};
 
 interface CharactersState {
   characters: Character[];
   loadingCharacters: boolean;
   charactersError: boolean;
   filters: FilterObjectType;
-  sortOrder: string;
+  sortOrder: "Default" | "A-Z" | "Z-A";
+  searchKeyword: string;
 }
 
 const initialState: CharactersState = {
@@ -25,6 +31,7 @@ const initialState: CharactersState = {
   charactersError: false,
   filters: {},
   sortOrder: "Default",
+  searchKeyword: "",
 };
 
 export const charactersReducer = createReducer(initialState, (builder: any) => {
@@ -80,5 +87,10 @@ export const charactersReducer = createReducer(initialState, (builder: any) => {
   builder.addCase(setSortOrder, (state: CharactersState, action: any) => ({
     ...state,
     sortOrder: action.payload,
+  }));
+
+  builder.addCase(setSearchKeyword, (state: CharactersState, action: any) => ({
+    ...state,
+    searchKeyword: action.payload,
   }));
 });
