@@ -98,14 +98,16 @@ function CharacterDetail() {
                     Are you sure you want to delete this character?
                   </p>
                   <div className="flex justify-between gap-x-3">
-                    <Link to="/">
-                      <button
-                        className="flex-1 rounded-lg text-white w-16 bg-primary-600 font-medium text-sm py-2"
-                        onClick={handleDeleteCharacter}
-                      >
-                        Delete
-                      </button>
-                    </Link>
+                    <div className="flex-1">
+                      <Link to="/">
+                        <button
+                          className="rounded-lg text-white w-full bg-primary-600 font-medium text-sm py-2"
+                          onClick={handleDeleteCharacter}
+                        >
+                          Delete
+                        </button>
+                      </Link>
+                    </div>
                     <button
                       className="flex-1 rounded-lg text-primary-600 w-16 bg-primary-100 font-medium text-sm py-2"
                       onClick={() => setShowDeleteConfirmation(false)}
